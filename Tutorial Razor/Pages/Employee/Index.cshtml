@@ -1,0 +1,60 @@
+﻿@page
+@model Inventory_Management.Pages.Employee.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Employees</h1>
+
+<p>
+    <a asp-page="Create">Create New Employee</a>
+</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Employees[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employees[0].LastName)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Employees[0].Password)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Employees[0].Role)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Employees[0].Active)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Employees) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.HiddenFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.empId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.empId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.empId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
