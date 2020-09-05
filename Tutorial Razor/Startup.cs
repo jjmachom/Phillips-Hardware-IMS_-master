@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Tutorial_Razor.Data;
 using Tutorial_Razor.Models;
 using Inventory.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Tutorial_Razor
 {
@@ -27,37 +28,42 @@ namespace Tutorial_Razor
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();/*.AddRazorPagesOptions(options =>
+            services.AddRazorPages().AddRazorPagesOptions(options =>
             {
                 options.Conventions.AuthorizePage("/Index");
-                options.Conventions.AuthorizePage("/Product/Index");
+                options.Conventions.AuthorizePage("/Product/Edit");
                 options.Conventions.AuthorizePage("/Employee/Delete");
-                options.Conventions.AuthorizePage("/Product/Index");
-                options.Conventions.AuthorizePage("/Supplier/Index");
-                
+                options.Conventions.AuthorizePage("/Employee/Edit");
+                options.Conventions.AuthorizePage("/Product/Delete");
+                options.Conventions.AuthorizePage("/Supplier/Edit");
+                options.Conventions.AuthorizePage("/Supplier/Delete");
+
+
+
                 options.Conventions.AllowAnonymousToPage("/Index");
-            });*/
+            });
 
-            //services.AddIdentity<AppUser, AppRole>(options =>
-            //{
-            //    options.User.RequireUniqueEmail = true;
+            services.AddIdentity<AppUser, AppRole>(options =>
+            {
+                
+                options.User.RequireUniqueEmail = true;
+                
 
+            }).AddEntityFrameworkStores<IdentityAppContext>().AddDefaultTokenProviders();
 
-            //}).AddEntityFrameworkStores<IdentityAppContext>();
+            services.AddDbContext<IdentityAppContext>(cfg =>
+            {
 
-            //services.AddDbContext<IdentityAppContext>(cfg =>
-            //{
-
-            //    cfg.UseSqlServer(Configuration.GetConnectionString("Tutorial_RazorContext"));
+              cfg.UseSqlServer(Configuration.GetConnectionString("Tutorial_RazorContext"));
                
-            //});
-
-
-            services.AddDbContext<Tutorial_RazorContext>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("Server")));
+            });
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/Login");
 
             services.AddDbContext<Tutorial_RazorContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("Server")));
+             options.UseSqlServer(Configuration.GetConnectionString("Tutorial_RazorContext")));
+
+            services.AddDbContext<Tutorial_RazorContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("Tutorial_RazorContext")));
 
 
 

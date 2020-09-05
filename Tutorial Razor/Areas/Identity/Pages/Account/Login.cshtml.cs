@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Inventory.Models;
+using Inventory.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -18,14 +18,14 @@ namespace Inventory.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<InventoryUser> _userManager;
+        private readonly SignInManager<InventoryUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        public LoginModel(SignInManager<AppUser> signInManager, 
+        public LoginModel(SignInManager<InventoryUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<AppUser> userManager,
+            UserManager<InventoryUser> userManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;

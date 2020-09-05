@@ -4,6 +4,8 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>Inventory</RootNamespace>
     <UserSecretsId>10fc98f7-195e-480c-90a1-1e37a92eba05</UserSecretsId>
+    <Company>JaeTech Consulting</Company>
+    <Product>Inventory Management</Product>
   </PropertyGroup>
 
   <ItemGroup>
